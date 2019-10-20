@@ -14,23 +14,66 @@ export default class SwapiService {
         const response = await this.getResource('/people/');
         return response.results
     }
-    getPerson(id) {
-        return this.getResource(`/people/${id}/`)
+    async getPerson(id) {
+        const person = await this.getResource(`/people/${id}/`);
+        return await this._transformPerson(person);
     }
     // planets request
     async getAllPlanets() {
         const response = await this.getResource('/planets/');
-        return response.results
+        return response.results;
+        // return response.results.map(this._transformPlanet)
     }
-    getPlanet(id) {
-        return this.getResource(`/planet/${id}/`)
+    async getPlanet(id) {
+        const planet =  await this.getResource(`/planets/${id}/`);
+        return  await this._transformPlanet(planet)
     }
     //Star ship request
     async getAllStarships() {
         const response = await this.getResource('/starships/');
         return response.results
     }
-    getAllStarship(id) {
-        return this.getResource(`/starships/${id}/`)
+    async getAllStarship(id) {
+        const starShip = await this.getResource(`/starships/${id}/`);
+        return await this._transformStarship(starShip)
     }
+    _extractId(item) {
+        const idRegExp = /\/([0-9]*)\/$/;
+        return item.url.match(idRegExp)[1]
+    }
+    // transform data
+    _transformPlanet(planet) {
+        return {
+            id: this._extractId(planet),
+            name: planet.name,
+            population: planet.population,
+            rotationPeriod: planet.rotation_period,
+            diameter: planet.diameter
+        }
+    };
+
+    _transformStarship(starship) {
+        return {
+            id: this._extractId(starship),
+            name: starship.name,
+            model: starship.model,
+            manufacturer: starship.manufacturer,
+            costInCredits: starship.costInCredits,
+            length: starship.length,
+            crew: starship.crew,
+            passengers: starship.passengers,
+            cargoCapacity: starship.cargoCapacity
+        }
+    };
+
+    _transformPerson(person) {
+        return {
+            id: this._extractId(person),
+            name: person.name,
+            gender: person.gender,
+            birthYear: person.birthYear,
+            eyeColor: person.eyeColor
+        }
+    };
+
 }
