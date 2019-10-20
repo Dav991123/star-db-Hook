@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Header from '../header';
 import RandomPlanet from '../random-planet';
@@ -8,10 +8,20 @@ import PersonDetails from '../person-details';
 import './app.css';
 
 const App = () => {
+    const [showRandomPlanet, setShowRandomPlanet] = useState(true);
+
     return (
         <div className={'App'}>
             <Header />
-            <RandomPlanet />
+            {
+                showRandomPlanet ?  <RandomPlanet /> : null
+            }
+            <button
+                className="toggle-planet btn btn-warning btn-lg"
+                onClick={() => setShowRandomPlanet(!showRandomPlanet)}
+            >
+                Toggle Random Planet
+            </button>
 
             <div className="row mb2">
                 <div className="col-md-6">

@@ -26,7 +26,13 @@ const RandomPlanet = ()  =>  {
             })
     };
     useEffect(() => {
+
         uptadePlanet();
+        const interval = setInterval(() => {
+            console.log('uptade')
+            uptadePlanet();
+        }, 10000);
+        return () => clearInterval(interval)
 
     },[]);
 
