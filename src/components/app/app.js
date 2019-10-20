@@ -9,7 +9,7 @@ import './app.css';
 
 const App = () => {
     const [showRandomPlanet, setShowRandomPlanet] = useState(true);
-
+    const [selectedPerson, setSelectedPerson] = useState(null);
     return (
         <div className={'App'}>
             <Header />
@@ -25,10 +25,12 @@ const App = () => {
 
             <div className="row mb2">
                 <div className="col-md-6">
-                    <ItemList />
+                    <ItemList
+                        onPersonSelected={setSelectedPerson}
+                    />
                 </div>
                 <div className="col-md-6">
-                    <PersonDetails />
+                    <PersonDetails personId={selectedPerson}/>
                 </div>
             </div>
         </div>

@@ -6,7 +6,7 @@ import './item-list.css';
 
 
 const swapi = new SwapiService();
-const ItemList = () =>  {
+const ItemList = ({onPersonSelected}) =>  {
     const [peopleList, setPeopleList] = useState(null);
     const [error, setError] = useState(false);
     useEffect(() => {
@@ -25,7 +25,7 @@ const ItemList = () =>  {
             <li
                 key={id}
                 className="list-group-item"
-                onClick={() => console.log(id)}
+                onClick={() => onPersonSelected(id)}
             >
                 {name}
             </li>

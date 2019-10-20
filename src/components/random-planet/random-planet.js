@@ -29,11 +29,9 @@ const RandomPlanet = ()  =>  {
 
         uptadePlanet();
         const interval = setInterval(() => {
-            console.log('uptade')
             uptadePlanet();
         }, 20000);
         return () => {
-            console.log('component-y merav')
             clearInterval(interval)
         }
 

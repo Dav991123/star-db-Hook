@@ -16,7 +16,7 @@ export default class SwapiService {
     }
     async getPerson(id) {
         const person = await this.getResource(`/people/${id}/`);
-        return await this._transformPerson(person);
+        return this._transformPerson(person);
     }
     // planets request
     async getAllPlanets() {
@@ -71,8 +71,8 @@ export default class SwapiService {
             id: this._extractId(person),
             name: person.name,
             gender: person.gender,
-            birthYear: person.birthYear,
-            eyeColor: person.eyeColor
+            birthYear: person.birth_year,
+            eyeColor: person.eye_color
         }
     }
 
